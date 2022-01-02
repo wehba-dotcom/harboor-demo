@@ -1,26 +1,27 @@
 package facades;
 
+import dtos.BoatDTO;
 import dtos.OwnerDTO;
+import entities.Boat;
 import entities.Owner;
-import java.util.List;
+import utils.EMF_Creator;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-
-//import errorhandling.RenameMeNotFoundException;
-import utils.EMF_Creator;
+import java.util.List;
 
 /**
  *
  * Rename Class to a relevant name Add add relevant facade methods
  */
-public class FacadeExample {
+public class FacadeBoat {
 
-    private static FacadeExample instance;
+    private static FacadeBoat instance;
     private static EntityManagerFactory emf;
-    
+
     //Private Constructor to ensure Singleton
-    private FacadeExample() {}
+    private FacadeBoat() {}
     
     
     /**
@@ -28,10 +29,10 @@ public class FacadeExample {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static FacadeExample getFacadeExample(EntityManagerFactory _emf) {
+    public static FacadeBoat getFacadeBoat(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new FacadeExample();
+            instance = new FacadeBoat();
         }
         return instance;
     }
@@ -40,47 +41,47 @@ public class FacadeExample {
         return emf.createEntityManager();
     }
     
-    public OwnerDTO create(OwnerDTO rm){
-        Owner rme = new Owner(rm.getName(), rm.getAddress(), rm.getPhone());
+    public BoatDTO create(BoatDTO rm){
+        Boat boat = new Boat(rm.getBrand(), rm.getMake(), rm.getName());
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(rme);
+            em.persist(boat);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return new OwnerDTO(rme);
+        return new BoatDTO(boat);
     }
-    public OwnerDTO getById(long id) { //throws RenameMeNotFoundException {
+    public BoatDTO getById(long id) { //throws RenameMeNotFoundException {
         EntityManager em = emf.createEntityManager();
-        Owner rm = em.find(Owner.class, id);
+        Boat boat = em.find(Boat.class, id);
 //        if (rm == null)
 //            throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
-        return new OwnerDTO(rm);
+        return new BoatDTO(boat);
     }
     
     //TODO Remove/Change this before use
-    public long getRenameMeCount(){
+    public long getBoatCount(){
         EntityManager em = getEntityManager();
         try{
-            long OwnerCount = (long)em.createQuery("SELECT COUNT(r) FROM Owner r").getSingleResult();
-            return OwnerCount;
+            long BoatCount = (long)em.createQuery("SELECT COUNT(r) FROM Boat r").getSingleResult();
+            return BoatCount;
         }finally{  
             em.close();
         }
     }
     
-    public List<OwnerDTO> getAll(){
+    public List<BoatDTO> getAll(){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Owner> query = em.createQuery("SELECT r FROM Owner r", Owner.class);
-        List<Owner> rms = query.getResultList();
-        return OwnerDTO.getDtos(rms);
+        TypedQuery<Boat> query = em.createQuery("SELECT r FROM Boat r", Boat.class);
+        List<Boat> rms = query.getResultList();
+        return BoatDTO.getDtos(rms);
     }
     
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
-        FacadeExample fe = getFacadeExample(emf);
+        FacadeBoat fe = getFacadeBoat(emf);
         fe.getAll().forEach(dto->System.out.println(dto));
     }
 
