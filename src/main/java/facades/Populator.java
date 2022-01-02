@@ -28,8 +28,7 @@ public class Populator {
         fb.create(new BoatDTO(new Boat("Tagger","Rønne","hason")));
         fb.create(new BoatDTO(new Boat("Sozi", "Alborg","Bread")));
         fb.create(new BoatDTO(new Boat("Fade", "Nexo","Sames")));
-
-
+        
     }
 
     public static void main(String[] args) {
