@@ -1,11 +1,9 @@
 package entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @NamedQuery(name = "Owner.deleteAllRows", query = "DELETE from Owner")
@@ -18,9 +16,16 @@ public class Owner implements Serializable {
     private String name;
     private String address;
     private int phone;
+@ManyToMany
+    List<Boat> boates;
 
+    public List<Boat> getBoates() {
+        return boates;
+    }
 
-    private Boat boat;
+    public void setBoates(List<Boat> boates) {
+        this.boates = boates;
+    }
 
     public Owner() {
     }
@@ -29,15 +34,10 @@ public class Owner implements Serializable {
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.boates= new ArrayList<>();
     }
 
-    public Boat getBoat() {
-        return boat;
-    }
 
-    public void setBoat(Boat boat) {
-        this.boat = boat;
-    }
 
     public String getName() {
         return name;
@@ -69,5 +69,9 @@ public class Owner implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Owner(List<Boat> boates) {
+        this.boates = boates;
     }
 }

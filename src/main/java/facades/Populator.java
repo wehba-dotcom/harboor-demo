@@ -8,6 +8,7 @@ package facades;
 import dtos.BoatDTO;
 import dtos.OwnerDTO;
 import entities.Boat;
+import entities.Harbour;
 import entities.Owner;
 
 import javax.persistence.EntityManager;
@@ -42,13 +43,20 @@ public class Populator {
         Boat b1= new Boat("Rose","Jonke","sadar");
         Boat b2= new Boat("Shar","sade","gades");
 
-        b2.addOner(o1);
-        b1.addOner(o2);
-        b1.addOner(o1);
+        Harbour h1 = new Harbour("Rønne","Bornholm",200);
+        Harbour h2 = new Harbour("GudHjem","Bornholm",100);
+
+
+        b1.AddOwner(o1);
+        b1.AddOwner(o2);
+
+        h1.addBoat(b1);
+        h1.addBoat(b2);
+        h2.addBoat(b1);
 
         em.getTransaction().begin();
-        em.persist(b1);
-        em.persist(b2);
+        em.persist(h1);
+        em.persist(h2);
         em.getTransaction().commit();
 
     }

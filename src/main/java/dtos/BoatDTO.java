@@ -20,13 +20,22 @@ public class BoatDTO {
     private String brand;
     private String make;
     private String name;
-   List<OwnerDTO> owners;
+    List<Owner> owners;
 
-    public BoatDTO(String brand, String make, String name,List<OwnerDTO> owners) {
+    public BoatDTO(String brand, String make, String name,List<Owner> owners) {
         this.brand = brand;
         this.make = make;
         this.name = name;
         this.owners= owners;
+
+    }
+
+    public List<Owner> getOwners() {
+        return owners;
+    }
+
+    public void setOwners(List<Owner> owners) {
+        this.owners = owners;
     }
 
     public static List<BoatDTO> getDtos(List<Boat> rms){
@@ -42,7 +51,7 @@ public class BoatDTO {
         this.brand = rm.getBrand();
         this.make = rm.getMake();
         this.name=rm.getName();
-        this.owners= OwnerDTO.getDtos(rm.getOners());
+
         }
 
     public long getB_id() {
@@ -53,13 +62,6 @@ public class BoatDTO {
         this.b_id = b_id;
     }
 
-    public List<OwnerDTO> getOwners() {
-        return owners;
-    }
-
-    public void setOwners(List<OwnerDTO> owners) {
-        this.owners = owners;
-    }
 
     public String getBrand() {
         return brand;

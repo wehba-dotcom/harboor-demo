@@ -5,6 +5,7 @@
  */
 package dtos;
 
+import entities.Boat;
 import entities.Owner;
 
 import java.util.ArrayList;
@@ -19,11 +20,13 @@ public class OwnerDTO {
     private String name;
     private String address;
     private int phone;
+    List<Boat> boats;
 
-    public OwnerDTO(String name, String address, int phone) {
+    public OwnerDTO(String name, String address, int phone,List<Boat> boats) {
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.boats= boats;
     }
 
     public static List<OwnerDTO> getDtos(List<Owner> rms){

@@ -16,19 +16,17 @@ public class Boat implements Serializable {
     private String brand;
     private String make;
     private String name;
+@ManyToOne
+    private Harbour harbour;
+    @ManyToMany(mappedBy = "boates", cascade =CascadeType.PERSIST )
+List<Owner> owners;
 
-    @OneToMany(cascade =CascadeType.PERSIST )
-    List<Owner> oners;
-
-    public List<Owner> getOners() {
-        return oners;
+    public Harbour getHarbour() {
+        return harbour;
     }
 
-    public void addOner(Owner owner) {
-        this.oners.add(owner);
-        if(owner != null){
-            owner.setBoat(this);
-        }
+    public void setHarbour(Harbour harbour) {
+        this.harbour = harbour;
     }
 
     public Boat() {
@@ -38,11 +36,18 @@ public class Boat implements Serializable {
         this.brand = brand;
         this.make = make;
         this.name = name;
-        this.oners = new ArrayList<>();
+        this.owners= new ArrayList<>();
+
     }
 
     public Long getB_id() {
         return b_id;
+    }
+    public void AddOwner(Owner owner){
+        if(owner != null){
+            this.owners.add(owner);
+            owner.getBoates().add(this);
+        }
     }
 
     public void setB_id(Long b_id) {
