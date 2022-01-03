@@ -1,14 +1,12 @@
 package entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = "Owner.deleteAllRows", query = "DELETE from Owner")
+@NamedQuery(name = "Boat.deleteAllRows", query = "DELETE from Boat")
 public class Boat implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,7 +17,19 @@ public class Boat implements Serializable {
     private String make;
     private String name;
 
+    @OneToMany(cascade =CascadeType.PERSIST )
+    List<Owner> oners;
 
+    public List<Owner> getOners() {
+        return oners;
+    }
+
+    public void addOner(Owner owner) {
+        this.oners.add(owner);
+        if(owner != null){
+            owner.setBoat(this);
+        }
+    }
 
     public Boat() {
     }
@@ -28,6 +38,7 @@ public class Boat implements Serializable {
         this.brand = brand;
         this.make = make;
         this.name = name;
+        this.oners = new ArrayList<>();
     }
 
     public Long getB_id() {

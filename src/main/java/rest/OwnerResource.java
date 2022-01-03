@@ -33,4 +33,11 @@ public class OwnerResource {
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("all")
+    public String allOwners() {
+        return GSON.toJson(FACADE.getAll());
+
+    }
 }

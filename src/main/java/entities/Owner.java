@@ -20,6 +20,8 @@ public class Owner implements Serializable {
     private int phone;
 
 
+    private Boat boat;
+
     public Owner() {
     }
 
@@ -27,6 +29,14 @@ public class Owner implements Serializable {
         this.name = name;
         this.address = address;
         this.phone = phone;
+    }
+
+    public Boat getBoat() {
+        return boat;
+    }
+
+    public void setBoat(Boat boat) {
+        this.boat = boat;
     }
 
     public String getName() {
