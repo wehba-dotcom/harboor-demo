@@ -5,8 +5,7 @@
  */
 package facades;
 
-import dtos.BoatDTO;
-import dtos.OwnerDTO;
+import com.google.gson.JsonElement;
 import entities.Boat;
 import entities.Harbour;
 import entities.Owner;
@@ -20,7 +19,7 @@ import utils.EMF_Creator;
  * @author tha
  */
 public class Populator {
-    public static void populate(){
+    public static JsonElement populate(){
             EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
        /* FacadeOwner fe = FacadeOwner.getFacadeOwner(emf);
         FacadeBoat fb = FacadeBoat.getFacadeBoat(emf);
@@ -59,6 +58,7 @@ public class Populator {
         em.persist(h2);
         em.getTransaction().commit();
 
+        return null;
     }
 
     public static void main(String[] args) {

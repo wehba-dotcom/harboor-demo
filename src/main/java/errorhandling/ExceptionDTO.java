@@ -17,5 +17,12 @@ public class ExceptionDTO {
       this.code = code;
       this.message = description;
   }
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
     
 }

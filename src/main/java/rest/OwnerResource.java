@@ -4,11 +4,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import utils.EMF_Creator;
 import facades.FacadeOwner;
+import facades.Populator;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import static facades.Populator.populate;
 
 //Todo Remove or change relevant parts before ACTUAL use
 @Path("harbour")
@@ -39,5 +43,11 @@ public class OwnerResource {
     public String allOwners() {
         return GSON.toJson(FACADE.getAll());
 
+    }
+ @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("test")
+    public Response Owners() {
+     return Response.ok(GSON.toJson(facades.Populator.populate())).build();
     }
 }
